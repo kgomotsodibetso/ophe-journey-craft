@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, Phone } from "lucide-react";
 import { useState } from "react";
 
-import logo from "@/assets/ophe-logo.png.asset.json";
+import logo from "@/assets/ophe-logo-compact.jpg";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { site } from "@/lib/site";
@@ -24,10 +24,10 @@ export function Header() {
       <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 sm:px-6">
         <Link to="/" className="flex min-w-0 items-center gap-2" aria-label={`${site.name} home`}>
           <img
-            src={logo.url}
+            src={logo}
             alt={`${site.name} logo`}
             width={160}
-            height={90}
+            height={65}
             className="h-10 w-auto shrink-0 sm:h-12"
           />
         </Link>
