@@ -154,25 +154,27 @@ Real customer testimonials
 
 Build the site now with realistic, on-brand placeholder content everywhere one of the above is missing, clearly structured so I can swap it in without needing structural changes. I have attached two logos. One is the original one with the black background, and the other one is the one with no background.
 
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://ophe-journey-craft.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/4e464792-9936-4521-97b2-91fe2dd6b947).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+You need Node.js 20+ and either `bun` or `npm`.
 
 ```sh
 git clone <this-repository-url>
 cd <repository-name>
-npm i
-npm run dev
+cp .env.example .env   # fill in your Supabase project URL and publishable key
+bun install             # or: npm install
+bun run dev             # or: npm run dev
 ```
+
+## Deploying to Railway
+
+The build targets a standalone Node server (`nitro` preset `node-server`), so
+Railway can run it directly:
+
+1. Create a new Railway project from this GitHub repo/branch.
+2. Set the environment variables from `.env.example` (Supabase URL + publishable
+   key, both the plain and `VITE_`-prefixed versions) in the Railway service's
+   Variables tab.
+3. Railway picks up `railway.json`, which runs `bun install && bun run build`
+   to build and `bun run start` (`node .output/server/index.mjs`) to serve —
+   it listens on whatever `PORT` Railway assigns automatically.

@@ -12,4 +12,9 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Deployed on Railway (plain Node), not Cloudflare — override the package's
+  // cloudflare-module default so `npm run build` outputs a standalone Node server.
+  nitro: {
+    preset: "node-server",
+  },
 });
