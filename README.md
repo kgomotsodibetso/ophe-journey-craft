@@ -166,15 +166,16 @@ bun install             # or: npm install
 bun run dev             # or: npm run dev
 ```
 
-## Deploying to Railway
+## Deploying to Vercel
 
-The build targets a standalone Node server (`nitro` preset `node-server`), so
-Railway can run it directly:
+The build targets Vercel's Build Output API directly (`nitro` preset `vercel`) —
+`bun run build` produces `.vercel/output` with a Node serverless function for
+SSR and a static `assets/` bundle, so Vercel needs no extra routing config.
 
-1. Create a new Railway project from this GitHub repo/branch.
-2. Set the environment variables from `.env.example` (Supabase URL + publishable
-   key, both the plain and `VITE_`-prefixed versions) in the Railway service's
-   Variables tab.
-3. Railway picks up `railway.json`, which runs `bun install && bun run build`
-   to build and `bun run start` (`node .output/server/index.mjs`) to serve —
-   it listens on whatever `PORT` Railway assigns automatically.
+1. Import this GitHub repo/branch as a new Vercel project (or deploy it
+   through the Vercel MCP/CLI).
+2. Set the environment variables from `.env.example` (Supabase URL +
+   publishable key, both the plain and `VITE_`-prefixed versions) in the
+   project's Settings → Environment Variables, then redeploy.
+3. Build command `bun install && bun run build` — no output directory
+   override needed; Vercel picks up `.vercel/output` automatically.
