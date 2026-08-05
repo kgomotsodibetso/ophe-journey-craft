@@ -2,6 +2,32 @@ import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 
+export type TourSummary = {
+  id: string;
+  slug: string;
+  title: string;
+  summary: string;
+  price_cents: number;
+  deposit_cents: number;
+};
+
+export type TourDate = { id: string; departure_date: string; seats_available: number };
+
+export type TourDetail = TourSummary & {
+  description: string;
+  inclusions: string[];
+  dates: TourDate[];
+};
+
+export type PostSummary = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  published_at: string;
+};
+
+export type PostDetail = PostSummary & { body: string };
+
 // Public, read-only content reads used by route loaders (SSR/prerender safe).
 function publicClient() {
   const key = process.env["SUPABASE_PUBLISHABLE_KEY"]!;
@@ -26,7 +52,7 @@ export const listTours = createServerFn({ method: "GET" }).handler(async () => {
     .select("id, slug, title, summary, price_cents, deposit_cents")
     .eq("published", true)
     .order("created_at");
-  return packages ?? [];
+  return (packages ?? []) as TourSummary[];
 });
 
 export const getTour = createServerFn({ method: "GET" })
@@ -46,7 +72,7 @@ export const getTour = createServerFn({ method: "GET" })
       .eq("package_id", pkg.id)
       .eq("is_open", true)
       .order("departure_date");
-    return { ...pkg, dates: dates ?? [] };
+    return { ...pkg, dates: dates ?? [] } as TourDetail;
   });
 
 export const listPosts = createServerFn({ method: "GET" }).handler(async () => {
@@ -56,7 +82,7 @@ export const listPosts = createServerFn({ method: "GET" }).handler(async () => {
     .select("slug, title, excerpt, published_at")
     .eq("published", true)
     .order("published_at", { ascending: false });
-  return data ?? [];
+  return (data ?? []) as PostSummary[];
 });
 
 export const getPost = createServerFn({ method: "GET" })
@@ -69,5 +95,5 @@ export const getPost = createServerFn({ method: "GET" })
       .eq("slug", data.slug)
       .eq("published", true)
       .maybeSingle();
-    return post;
+    return post as PostDetail | null;
   });

@@ -11,11 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesAirportTransfersRouteImport } from './routes/services.airport-transfers'
 import { Route as ServicesGroupEventTransportRouteImport } from './routes/services.group-event-transport'
 import { Route as ServicesLongDistanceTravelRouteImport } from './routes/services.long-distance-travel'
 import { Route as ServicesPrivateCorporateTravelRouteImport } from './routes/services.private-corporate-travel'
+import { Route as ToursIndexRouteImport } from './routes/tours.index'
+import { Route as ToursSlugRouteImport } from './routes/tours.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -25,6 +30,21 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesIndexRoute = ServicesIndexRouteImport.update({
@@ -56,73 +76,118 @@ const ServicesPrivateCorporateTravelRoute =
     path: '/services/private-corporate-travel',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ToursIndexRoute = ToursIndexRouteImport.update({
+  id: '/tours/',
+  path: '/tours/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToursSlugRoute = ToursSlugRouteImport.update({
+  id: '/tours/$slug',
+  path: '/tours/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/gallery': typeof GalleryRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/services/airport-transfers': typeof ServicesAirportTransfersRoute
   '/services/group-event-transport': typeof ServicesGroupEventTransportRoute
   '/services/long-distance-travel': typeof ServicesLongDistanceTravelRoute
   '/services/private-corporate-travel': typeof ServicesPrivateCorporateTravelRoute
+  '/tours/$slug': typeof ToursSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/tours/': typeof ToursIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/gallery': typeof GalleryRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/services/airport-transfers': typeof ServicesAirportTransfersRoute
   '/services/group-event-transport': typeof ServicesGroupEventTransportRoute
   '/services/long-distance-travel': typeof ServicesLongDistanceTravelRoute
   '/services/private-corporate-travel': typeof ServicesPrivateCorporateTravelRoute
+  '/tours/$slug': typeof ToursSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/services': typeof ServicesIndexRoute
+  '/tours': typeof ToursIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/gallery': typeof GalleryRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/services/airport-transfers': typeof ServicesAirportTransfersRoute
   '/services/group-event-transport': typeof ServicesGroupEventTransportRoute
   '/services/long-distance-travel': typeof ServicesLongDistanceTravelRoute
   '/services/private-corporate-travel': typeof ServicesPrivateCorporateTravelRoute
+  '/tours/$slug': typeof ToursSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/tours/': typeof ToursIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/gallery'
+    | '/blog/$slug'
     | '/services/airport-transfers'
     | '/services/group-event-transport'
     | '/services/long-distance-travel'
     | '/services/private-corporate-travel'
+    | '/tours/$slug'
+    | '/blog/'
     | '/services/'
+    | '/tours/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/gallery'
+    | '/blog/$slug'
     | '/services/airport-transfers'
     | '/services/group-event-transport'
     | '/services/long-distance-travel'
     | '/services/private-corporate-travel'
+    | '/tours/$slug'
+    | '/blog'
     | '/services'
+    | '/tours'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/gallery'
+    | '/blog/$slug'
     | '/services/airport-transfers'
     | '/services/group-event-transport'
     | '/services/long-distance-travel'
     | '/services/private-corporate-travel'
+    | '/tours/$slug'
+    | '/blog/'
     | '/services/'
+    | '/tours/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  GalleryRoute: typeof GalleryRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   ServicesAirportTransfersRoute: typeof ServicesAirportTransfersRoute
   ServicesGroupEventTransportRoute: typeof ServicesGroupEventTransportRoute
   ServicesLongDistanceTravelRoute: typeof ServicesLongDistanceTravelRoute
   ServicesPrivateCorporateTravelRoute: typeof ServicesPrivateCorporateTravelRoute
+  ToursSlugRoute: typeof ToursSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
+  ToursIndexRoute: typeof ToursIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -139,6 +204,27 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/': {
@@ -176,17 +262,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesPrivateCorporateTravelRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tours/': {
+      id: '/tours/'
+      path: '/tours'
+      fullPath: '/tours/'
+      preLoaderRoute: typeof ToursIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tours/$slug': {
+      id: '/tours/$slug'
+      path: '/tours/$slug'
+      fullPath: '/tours/$slug'
+      preLoaderRoute: typeof ToursSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  GalleryRoute: GalleryRoute,
+  BlogSlugRoute: BlogSlugRoute,
   ServicesAirportTransfersRoute: ServicesAirportTransfersRoute,
   ServicesGroupEventTransportRoute: ServicesGroupEventTransportRoute,
   ServicesLongDistanceTravelRoute: ServicesLongDistanceTravelRoute,
   ServicesPrivateCorporateTravelRoute: ServicesPrivateCorporateTravelRoute,
+  ToursSlugRoute: ToursSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
+  ToursIndexRoute: ToursIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
