@@ -10,33 +10,119 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ServicesAirportTransfersRouteImport } from './routes/services.airport-transfers'
+import { Route as ServicesGroupEventTransportRouteImport } from './routes/services.group-event-transport'
+import { Route as ServicesLongDistanceTravelRouteImport } from './routes/services.long-distance-travel'
+import { Route as ServicesPrivateCorporateTravelRouteImport } from './routes/services.private-corporate-travel'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesAirportTransfersRoute =
+  ServicesAirportTransfersRouteImport.update({
+    id: '/services/airport-transfers',
+    path: '/services/airport-transfers',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesGroupEventTransportRoute =
+  ServicesGroupEventTransportRouteImport.update({
+    id: '/services/group-event-transport',
+    path: '/services/group-event-transport',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesLongDistanceTravelRoute =
+  ServicesLongDistanceTravelRouteImport.update({
+    id: '/services/long-distance-travel',
+    path: '/services/long-distance-travel',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesPrivateCorporateTravelRoute =
+  ServicesPrivateCorporateTravelRouteImport.update({
+    id: '/services/private-corporate-travel',
+    path: '/services/private-corporate-travel',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/services/airport-transfers': typeof ServicesAirportTransfersRoute
+  '/services/group-event-transport': typeof ServicesGroupEventTransportRoute
+  '/services/long-distance-travel': typeof ServicesLongDistanceTravelRoute
+  '/services/private-corporate-travel': typeof ServicesPrivateCorporateTravelRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/services/airport-transfers': typeof ServicesAirportTransfersRoute
+  '/services/group-event-transport': typeof ServicesGroupEventTransportRoute
+  '/services/long-distance-travel': typeof ServicesLongDistanceTravelRoute
+  '/services/private-corporate-travel': typeof ServicesPrivateCorporateTravelRoute
+  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/services/airport-transfers': typeof ServicesAirportTransfersRoute
+  '/services/group-event-transport': typeof ServicesGroupEventTransportRoute
+  '/services/long-distance-travel': typeof ServicesLongDistanceTravelRoute
+  '/services/private-corporate-travel': typeof ServicesPrivateCorporateTravelRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/services/airport-transfers'
+    | '/services/group-event-transport'
+    | '/services/long-distance-travel'
+    | '/services/private-corporate-travel'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/services/airport-transfers'
+    | '/services/group-event-transport'
+    | '/services/long-distance-travel'
+    | '/services/private-corporate-travel'
+    | '/services'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/services/airport-transfers'
+    | '/services/group-event-transport'
+    | '/services/long-distance-travel'
+    | '/services/private-corporate-travel'
+    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ServicesAirportTransfersRoute: typeof ServicesAirportTransfersRoute
+  ServicesGroupEventTransportRoute: typeof ServicesGroupEventTransportRoute
+  ServicesLongDistanceTravelRoute: typeof ServicesLongDistanceTravelRoute
+  ServicesPrivateCorporateTravelRoute: typeof ServicesPrivateCorporateTravelRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +134,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/airport-transfers': {
+      id: '/services/airport-transfers'
+      path: '/services/airport-transfers'
+      fullPath: '/services/airport-transfers'
+      preLoaderRoute: typeof ServicesAirportTransfersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/group-event-transport': {
+      id: '/services/group-event-transport'
+      path: '/services/group-event-transport'
+      fullPath: '/services/group-event-transport'
+      preLoaderRoute: typeof ServicesGroupEventTransportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/long-distance-travel': {
+      id: '/services/long-distance-travel'
+      path: '/services/long-distance-travel'
+      fullPath: '/services/long-distance-travel'
+      preLoaderRoute: typeof ServicesLongDistanceTravelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/private-corporate-travel': {
+      id: '/services/private-corporate-travel'
+      path: '/services/private-corporate-travel'
+      fullPath: '/services/private-corporate-travel'
+      preLoaderRoute: typeof ServicesPrivateCorporateTravelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ServicesAirportTransfersRoute: ServicesAirportTransfersRoute,
+  ServicesGroupEventTransportRoute: ServicesGroupEventTransportRoute,
+  ServicesLongDistanceTravelRoute: ServicesLongDistanceTravelRoute,
+  ServicesPrivateCorporateTravelRoute: ServicesPrivateCorporateTravelRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
