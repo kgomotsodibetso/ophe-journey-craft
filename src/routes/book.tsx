@@ -100,7 +100,7 @@ function BookPage() {
         .eq("package_id", (pkg as { id: string }).id)
         .eq("is_open", true)
         .order("departure_date");
-      return { ...(pkg as Record<string, never>), dates: dates ?? [] } as unknown as {
+      return { ...(pkg as unknown as Record<string, unknown>), dates: dates ?? [] } as unknown as {
         id: string;
         title: string;
         price_cents: number;

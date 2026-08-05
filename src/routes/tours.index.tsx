@@ -4,7 +4,7 @@ import sunCityImg from "@/assets/tour-sun-city.jpg";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CTABand, PageHero, Section } from "@/components/site/Bits";
-import { listTours } from "@/lib/public-content.functions";
+import { listTours, type TourSummary } from "@/lib/public-content.functions";
 import { rands } from "@/lib/site";
 
 export const Route = createFileRoute("/tours/")({
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/tours/")({
 });
 
 function ToursIndex() {
-  const tours = Route.useLoaderData();
+  const tours = Route.useLoaderData() as TourSummary[];
 
   return (
     <>

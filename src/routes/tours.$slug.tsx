@@ -4,7 +4,7 @@ import { Check } from "lucide-react";
 import sunCityImg from "@/assets/tour-sun-city.jpg";
 import { Button } from "@/components/ui/button";
 import { CTABand, PageHero, Section } from "@/components/site/Bits";
-import { getTour } from "@/lib/public-content.functions";
+import { getTour, type TourDetail } from "@/lib/public-content.functions";
 import { rands, site } from "@/lib/site";
 
 export const Route = createFileRoute("/tours/$slug")({
@@ -81,7 +81,7 @@ function TourNotFound() {
 }
 
 function TourDetail() {
-  const tour = Route.useLoaderData();
+  const tour = Route.useLoaderData() as TourDetail;
 
   return (
     <>

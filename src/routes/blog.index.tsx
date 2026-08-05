@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { PageHero, Section } from "@/components/site/Bits";
 import { Card, CardContent } from "@/components/ui/card";
-import { listPosts } from "@/lib/public-content.functions";
+import { listPosts, type PostSummary } from "@/lib/public-content.functions";
 
 export const Route = createFileRoute("/blog/")({
   loader: () => listPosts(),
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/blog/")({
 });
 
 function BlogIndex() {
-  const posts = Route.useLoaderData();
+  const posts = Route.useLoaderData() as PostSummary[];
   return (
     <>
       <PageHero

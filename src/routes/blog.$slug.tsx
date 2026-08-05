@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
 import { Button } from "@/components/ui/button";
 import { CTABand, Section } from "@/components/site/Bits";
-import { getPost } from "@/lib/public-content.functions";
+import { getPost, type PostDetail } from "@/lib/public-content.functions";
 import { site } from "@/lib/site";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -62,7 +62,7 @@ function PostNotFound() {
 }
 
 function BlogPost() {
-  const post = Route.useLoaderData();
+  const post = Route.useLoaderData() as PostDetail;
   return (
     <>
       <Section className="pb-0">
@@ -76,7 +76,7 @@ function BlogPost() {
           </p>
           <h1 className="mt-3 text-3xl font-bold text-balance md:text-4xl">{post.title}</h1>
           <div className="mt-8 space-y-4">
-            {post.body.split("\n\n").map((para, i) => (
+            {post.body.split("\n\n").map((para: string, i: number) => (
               <p key={i} className="whitespace-pre-line text-muted-foreground">
                 {para}
               </p>
