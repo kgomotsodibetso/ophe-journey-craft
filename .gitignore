@@ -20,7 +20,10 @@ dist-ssr
 .wrangler/
 .dev.vars
 
-# Local env — set the same vars in Railway's dashboard instead
+# Vercel
+.vercel
+
+# Local env — set the same vars in Vercel's project settings instead
 .env
 .env.*
 !.env.example

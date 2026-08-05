@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, MessageCircle, Phone } from "lucide-react";
 
-import logo from "@/assets/ophe-logo.png.asset.json";
+import logo from "@/assets/ophe-logo-compact.jpg";
 import { defaultWaMessage, site, waLink } from "@/lib/site";
 
 const quickLinks = [
@@ -25,10 +25,10 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <img
-            src={logo.url}
+            src={logo}
             alt={`${site.name} logo`}
             width={200}
-            height={112}
+            height={81}
             loading="lazy"
             className="h-14 w-auto"
           />
